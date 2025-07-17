@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 function Square({value, onSquareClick}){
-
   return (
     <button 
       className="square"
@@ -13,15 +12,28 @@ function Square({value, onSquareClick}){
 }
 
 export default function Board() {
+
+  const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null)); // create array of 9 items set to null
 
   function handleClick(i) {
     console.log('handleclick');
     const nextSquares = squares.slice(); // create copy of array
+
+    if(squares[i]) {
+      return;
+    }
+    
+    if(xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = 'O'
+    }
     console.log(nextSquares);
-    nextSquares[i] = 'X';
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
+  
   return <>
   <div className="board-row">
     <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
