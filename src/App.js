@@ -88,12 +88,12 @@ export default function Game(){
   const [currentMove, setCurrentMove] = useState(0); 
   const xIsNext = currentMove % 2 === 0;
 
-  console.log('history', history);
-  const currentSquares = history[currentMove];
+  const currentSquares = history[currentMove]; // get current moves in array 
 
-  function handlePlay(nextSquares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+  function handlePlay(nextSquares) { 
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares]; // inc history up to and including current move
     setHistory(nextHistory); // create new array to contain all items in history
+    console.log('new history', nextHistory);
     setCurrentMove(nextHistory.length - 1); 
   }
 
@@ -120,7 +120,7 @@ export default function Game(){
   return (
     <div className="game">
       <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/> 
       </div>
       <div className="game-info">
         <ol>
